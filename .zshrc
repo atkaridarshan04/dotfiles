@@ -18,3 +18,9 @@ source <(fzf --zsh)
 
 # Starship
 eval "$(starship init zsh)"
+
+# Autosuggestions
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# Syntax highlighting (must be last)
+source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

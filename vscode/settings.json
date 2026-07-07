@@ -1,0 +1,188 @@
+{
+  // Fonts
+  "editor.fontFamily": "JetBrainsMono Nerd Font",
+  "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font",
+  "editor.fontLigatures": true,
+
+  // Editor
+  "editor.cursorBlinking": "smooth",
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.smoothScrolling": true,
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": true,
+  "editor.guides.indentation": true,
+  "editor.guides.highlightActiveIndentation": true,
+  "editor.inlineSuggest.enabled": true,
+  "editor.formatOnSave": true,
+  "editor.renderWhitespace": "selection",
+  "editor.autoClosingBrackets": "always",
+  "editor.wordWrap": "off",
+  "editor.wordWrapColumn": 120,
+  "editor.minimap.enabled": false,
+
+  // "editor.autoClosingQuotes": "always",
+
+  // Files
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 1000,
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+
+  // Git
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "git.openRepositoryInParentFolders": "always",
+
+  // Explorer
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+
+  // Workbench
+  "workbench.startupEditor": "none",
+  "workbench.editor.enablePreview": false,
+  "workbench.editor.wrapTabs": true,
+  "workbench.sideBar.location": "right",
+  "workbench.iconTheme": "material-icon-theme",
+
+  // Breadcrumbs
+  "breadcrumbs.enabled": true,
+
+  // Terminal
+  "terminal.integrated.enablePersistentSessions": true,
+  "terminal.integrated.persistentSessionReviveProcess": "onExitAndWindowClose",
+  "terminal.integrated.copyOnSelection": true,
+  "terminal.integrated.scrollback": 30000,
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "terminal.integrated.cursorBlinking": true,
+  "terminal.integrated.cursorStyle": "line",
+  "terminal.integrated.gpuAcceleration": "auto",
+  "terminal.integrated.shellIntegration.enabled": true,
+  "terminal.integrated.tabs.hideCondition": "singleTerminal",
+  "terminal.integrated.tabs.enabled": true,
+
+  // Window
+  "window.title": "${dirty}${activeEditorShort}${separator}${rootName}",
+  "window.commandCenter": true,
+
+  "diffEditor.renderSideBySide": true,
+
+  // ------------------
+
+  "code-runner.runInTerminal": true,
+  "editor.mouseWheelZoom": true,
+  "workbench.editor.empty.hint": "hidden",
+  "launch": {
+    "configurations": [],
+    "compounds": [],
+  },
+  "settingsSync.ignoredSettings": ["livePreview.hostIP"],
+  "redhat.telemetry.enabled": true,
+  "pieces.setCopilotLocation": true,
+  "livePreview.hostIP": "192.168.0.108",
+  "js/ts.updateImportsOnFileMove.enabled": "always",
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact",
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features",
+  },
+  "editor.accessibilitySupport": "off",
+  "git.suggestSmartCommit": false,
+  "terminal.integrated.enableMultiLinePasteWarning": "auto",
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features",
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features",
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features",
+  },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features",
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+  "diffEditor.hideUnchangedRegions.enabled": true,
+  "terminal.integrated.defaultProfile.linux": "",
+  "workbench.editorAssociations": {
+    "*.csv": "gc-excelviewer-csv-editor",
+  },
+
+  "jupyter.askForKernelRestart": false,
+  "amazonQ.suppressPrompts": {
+    "amazonQChatDisclaimer": true,
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml",
+  },
+  "azureTerraform.survey": {
+    "surveyPromptDate": "2026-07-12T04:51:20.224Z",
+    "surveyPromptIgnoredCount": 1,
+  },
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": false,
+    "markdown": true,
+    "scminput": false,
+    "cpp": false,
+    "dockerfile": true,
+    "python": true,
+    "yaml": true,
+  },
+  "explorer.fileNesting.patterns": {
+    "*.ts": "${capture}.js",
+    "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
+    "*.jsx": "${capture}.js",
+    "*.tsx": "${capture}.ts",
+    "tsconfig.json": "tsconfig.*.json",
+    "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb, bun.lock",
+    "*.sqlite": "${capture}.${extname}-*",
+    "*.db": "${capture}.${extname}-*",
+    "*.sqlite3": "${capture}.${extname}-*",
+    "*.db3": "${capture}.${extname}-*",
+    "*.sdb": "${capture}.${extname}-*",
+    "*.s3db": "${capture}.${extname}-*",
+  },
+  "[dockercompose]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.autoIndent": "advanced",
+    "editor.defaultFormatter": "redhat.vscode-yaml",
+  },
+  "[github-actions-workflow]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml",
+  },
+  "workbench.colorTheme": "GitHub Dark Default",
+  "security.workspace.trust.untrustedFiles": "open",
+  "terminal.integrated.profiles.osx": {
+    "bash": {
+      "path": "bash",
+      "args": ["-l"],
+      "icon": "terminal-bash",
+    },
+    "zsh": {
+      "path": "/bin/zsh",
+      "args": ["-l"],
+    },
+    "fish": {
+      "path": "fish",
+      "args": ["-l"],
+    },
+    "tmux": {
+      "path": "tmux",
+      "icon": "terminal-tmux",
+    },
+    "pwsh": {
+      "path": "pwsh",
+      "icon": "terminal-powershell",
+    },
+  },
+}

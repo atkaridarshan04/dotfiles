@@ -1,61 +1,177 @@
+# ==========================
+# Starship Configuration
+# Clean • Fast • Developer
+# ==========================
+
 add_newline = false
 command_timeout = 100
-
+scan_timeout = 30
 
 format = """
 $kubernetes\
 $directory\
 $git_branch\
 $git_status\
+$python\
 $terraform\
-$cmd_duration
-❯ 
+$docker_context\
+$cmd_duration\
+$line_break\
+$character
 """
 
+# -------------------------
+# Prompt
+# -------------------------
 
-# Drop ugly default prompt characters
 [character]
-success_symbol = ''
-error_symbol = ''
+success_symbol = "[❯](bold green) "
+error_symbol = "[❯](bold red) "
+vimcmd_symbol = "[❮](bold yellow) "
 
-# Shows current directory
+# -------------------------
+# Directory
+# -------------------------
+
 [directory]
-truncation_length = 1
-truncation_symbol = '…/'
-home_symbol = '󰋜 ~'
-read_only_style = '197'
-read_only = '  '
-format = 'at [$path]($style)[$read_only]($read_only_style) '
+style = "bold cyan"
+format = "[$path]($style) "
+home_symbol = "~"
+truncate_to_repo = true
+truncation_length = 3
+truncation_symbol = "…/"
+read_only = " "
 
-# Shows current git branch
+# -------------------------
+# Git Branch
+# -------------------------
+
 [git_branch]
-symbol = ' '
-format = 'via [$symbol$branch]($style)'
-# truncation_length = 4
-truncation_symbol = '…/'
-style = 'bold green'
+symbol = " "
+style = "bold green"
+format = "on [$symbol$branch]($style) "
 
-# Shows current git status
+# -------------------------
+# Git Status
+# -------------------------
+
 [git_status]
-format = '([ \( $all_status$ahead_behind\)]($style) )'
-style = 'bold green'
-conflicted = '[ confliced=${count}](red) '
-up_to_date = '[󰘽 up-to-date](green) '
-untracked = '[󰋗 untracked=${count}](red) '
-ahead = ' ahead=${count}'
-diverged = ' ahead=${ahead_count}  behind=${behind_count}'
-behind = ' behind=${count}'
-stashed = '[ stashed=${count}](green) '
-modified = '[󰛿 modified=${count}](yellow) '
-staged = '[󰐗 staged=${count}](green) '
-renamed = '[󱍸 renamed=${count}](yellow) '
-deleted = '[󰍶 deleted=${count}](red) '
+style = "yellow"
+format = "([$all_status$ahead_behind]($style) )"
 
-# Shows kubernetes context and namespace
+conflicted = "=${count}"
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕"
+up_to_date = ""
+untracked = "?${count}"
+stashed = "*${count}"
+modified = "!${count}"
+staged = "+${count}"
+renamed = "»${count}"
+deleted = "✘${count}"
+
+# -------------------------
+# Python
+# -------------------------
+
+[python]
+symbol = " "
+style = "yellow"
+pyenv_version_name = true
+detect_extensions = ["py"]
+detect_files = [
+  "pyproject.toml",
+  "requirements.txt",
+  "Pipfile",
+  "poetry.lock",
+  ".python-version"
+]
+format = "via [$symbol$virtualenv]($style)"
+
+# -------------------------
+# Terraform
+# -------------------------
+
+[terraform]
+symbol = "󱁢 "
+style = "bold blue"
+format = " via [$symbol$workspace]($style)"
+
+# -------------------------
+# Docker
+# -------------------------
+
+[docker_context]
+symbol = " "
+style = "blue"
+format = " via [$symbol$context]($style)"
+only_with_files = true
+
+# -------------------------
+# Kubernetes
+# -------------------------
+
 [kubernetes]
-format = 'via [󱃾 $context\($namespace\)](bold purple) '
 disabled = false
+symbol = "󱃾 "
+style = "bold purple"
+format = "[$symbol$context( ($namespace))]($style) "
 
+# -------------------------
+# Command Duration
+# -------------------------
+
+[cmd_duration]
+min_time = 1500
+style = "dimmed white"
+format = "[took $duration]($style) "
+
+# -------------------------
+# Disable unused modules
+# -------------------------
+
+[package]
+disabled = true
+
+[nodejs]
+disabled = true
+
+[rust]
+disabled = true
+
+[golang]
+disabled = true
+
+[java]
+disabled = true
+
+[php]
+disabled = true
+
+[ruby]
+disabled = true
+
+[dotnet]
+disabled = true
+
+[c]
+disabled = true
+
+[cmake]
+disabled = true
+
+[swift]
+disabled = true
+
+[aws]
+disabled = true
+
+[gcloud]
+disabled = true
+
+[azure]
+disabled = true
 
 [username]
 disabled = true
@@ -64,5 +180,14 @@ disabled = true
 disabled = true
 
 [os]
+disabled = true
+
+[memory_usage]
+disabled = true
+
+[battery]
+disabled = true
+
+[shell]
 disabled = true
 
