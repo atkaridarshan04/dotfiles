@@ -2,9 +2,11 @@
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Custom configs
-for file in ~/.zsh/*.zsh; do
-  [[ -f "$file" ]] && source "$file"
-done
+if [[ -d "$HOME/.zsh" ]]; then
+    for file in "$HOME/.zsh"/*.zsh; do
+        [[ -f "$file" ]] && source "$file"
+    done
+fi
 
 # Completion
 autoload -Uz compinit
@@ -16,11 +18,15 @@ eval "$(zoxide init zsh)"
 # fzf
 source <(fzf --zsh)
 
+# Autosuggestions
+if [[ -f "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
+    source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+fi
+
 # Starship
 eval "$(starship init zsh)"
 
-# Autosuggestions
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-
 # Syntax highlighting (must be last)
-source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [[ -f "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
+    source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+fi

@@ -1,48 +1,47 @@
-# find out which distribution we are running on
-LFILE="/etc/*-release"
-MFILE="/System/Library/CoreServices/SystemVersion.plist"
-if [[ -f $LFILE ]]; then
-  _distro=$(awk '/^ID=/' /etc/*-release | awk -F'=' '{ print tolower($2) }')
-elif [[ -f $MFILE ]]; then
-  _distro="macos"
+# Detect OS
 
-  # on mac os use the systemprofiler to determine the current model
-  _device=$(system_profiler SPHardwareDataType | awk '/Model Name/ {print $3,$4,$5,$6,$7}')
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    export STARSHIP_DISTRO=""
 
-  case $_device in
-    *MacBook*)     DEVICE="";;
-    *mini*)        DEVICE="󰇄";;
-    *)             DEVICE="";;
-  esac
+    MODEL=$(sysctl -n hw.model 2>/dev/null)
+
+    case "$MODEL" in
+        MacBook*)
+            export STARSHIP_DEVICE=""
+            ;;
+        *)
+            export STARSHIP_DEVICE=""
+            ;;
+    esac
+
+elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+
+    DISTRO=$(awk -F= '/^ID=/{print $2}' /etc/os-release 2>/dev/null)
+
+    case "$DISTRO" in
+        arch)
+            export STARSHIP_DISTRO=""
+            ;;
+        ubuntu)
+            export STARSHIP_DISTRO=""
+            ;;
+        debian)
+            export STARSHIP_DISTRO=""
+            ;;
+        fedora)
+            export STARSHIP_DISTRO=""
+            ;;
+        nixos)
+            export STARSHIP_DISTRO=""
+            ;;
+        *)
+            export STARSHIP_DISTRO=""
+            ;;
+    esac
+
 fi
 
-# set an icon based on the distro
-# make sure your font is compatible with https://github.com/lukas-w/font-logos
-case $_distro in
-    *kali*)                  ICON="ﴣ";;
-    *arch*)                  ICON="";;
-    *debian*)                ICON="";;
-    *raspbian*)              ICON="";;
-    *ubuntu*)                ICON="";;
-    *elementary*)            ICON="";;
-    *fedora*)                ICON="";;
-    *coreos*)                ICON="";;
-    *gentoo*)                ICON="";;
-    *mageia*)                ICON="";;
-    *centos*)                ICON="";;
-    *opensuse*|*tumbleweed*) ICON="";;
-    *sabayon*)               ICON="";;
-    *slackware*)             ICON="";;
-    *linuxmint*)             ICON="";;
-    *alpine*)                ICON="";;
-    *aosc*)                  ICON="";;
-    *nixos*)                 ICON="";;
-    *devuan*)                ICON="";;
-    *manjaro*)               ICON="";;
-    *rhel*)                  ICON="";;
-    *macos*)                 ICON="";;
-    *)                       ICON="";;
-esac
 
-export STARSHIP_DISTRO="$ICON"
-export STARSHIP_DEVICE="$DEVICE"
+# Start Starship
+
+eval "$(starship init zsh)"

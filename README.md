@@ -6,6 +6,28 @@ This repository contains my shell, terminal, editor, and tool configurations tha
 
 ---
 
+## Structure
+
+```
+.
+├── .config
+│   └── starship.toml
+├── .warp
+│   └── themes
+├── .zsh
+│   ├── aliases.zsh
+│   ├── functions.zsh
+│   ├── nvm.zsh
+│   └── starship.zsh
+├── .zshrc
+├── Brewfile
+├── README.md
+└── vscode
+    └── settings.json
+```
+
+---
+
 ## Setup
 
 Clone the repository:
@@ -21,16 +43,32 @@ Install packages:
 brew bundle
 ```
 
-Link configuration files:
+## Copy configuration files to home directory:
 
 ```bash
-./setup.sh
+cp .zshrc ~/.zshrc
+cp -R .zsh ~/.zsh
 ```
 
-Restart the terminal:
+```bash
+mkdir -p ~/.config
+cp .config/starship.toml ~/.config/starship.toml
+```
 
 ```bash
-exec zsh
+cp -R .warp ~/.warp
+```
+
+VS Code settings:
+
+```bash
+cp vscode/settings.json ~/Library/Application\ Support/Code/User/settings.json
+```
+
+Reload shell:
+
+```bash
+source ~/.zshrc
 ```
 
 ---
