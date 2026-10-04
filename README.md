@@ -1,8 +1,6 @@
 # Dotfiles
 
-Personal configuration files for my development environment.
-
-This repository contains my shell, terminal, editor, and tool configurations that I use across machines.
+Personal configuration for shell, terminal, editor and tools, themed with Catppuccin Mocha.
 
 ---
 
@@ -11,76 +9,78 @@ This repository contains my shell, terminal, editor, and tool configurations tha
 ```
 .
 ├── .config
+│   ├── bat/config
+│   ├── ghostty/config
 │   └── starship.toml
-├── .warp
-│   └── themes
+├── .warp/themes
 ├── .zsh
 │   ├── aliases.zsh
+│   ├── env.zsh
 │   ├── functions.zsh
-│   ├── nvm.zsh
-│   └── starship.zsh
+│   ├── fzf.zsh
+│   └── history.zsh
 ├── .zshrc
 ├── Brewfile
-├── README.md
-└── vscode
-    └── settings.json
+├── Makefile
+├── install.sh
+├── iterm2
+│   ├── Catppuccin-Mocha.json
+│   └── catppuccin-mocha.itermcolors
+├── scripts/check-palette.py
+└── vscode/settings.json
 ```
+
+Run `make check` to validate shell syntax, the starship and Ghostty configs, the iTerm2 profile and palette consistency.
 
 ---
 
 ## Setup
 
-Clone the repository:
-
 ```bash
-git clone <repo-url>
-cd dotfiles
-````
-
-Install packages:
-
-```bash
+git clone <repo-url> ~/personal/dotfiles
+cd ~/personal/dotfiles
 brew bundle
+./install.sh
+exec zsh
 ```
 
-## Copy configuration files to home directory:
+`install.sh` symlinks each file into place and backs up anything it replaces to `<path>.backup.<timestamp>`. Re-running is safe.
 
-```bash
-cp .zshrc ~/.zshrc
-cp -R .zsh ~/.zsh
-```
+Then:
 
-```bash
-mkdir -p ~/.config
-cp .config/starship.toml ~/.config/starship.toml
-```
-
-```bash
-cp -R .warp ~/.warp
-```
-
-VS Code settings:
-
-```bash
-cp vscode/settings.json ~/Library/Application\ Support/Code/User/settings.json
-```
-
-Reload shell:
-
-```bash
-source ~/.zshrc
-```
+- **iTerm2** — Settings → Profiles → *Catppuccin Mocha* → set as default.
+- **VS Code** — install the *Catppuccin for VSCode* extension.
 
 ---
 
-## Backup
+## Theme
 
-Before replacing existing files, backup current configurations.
+Catppuccin Mocha across every surface:
 
-Example:
+| Surface | File |
+|---|---|
+| Ghostty | `.config/ghostty/config` |
+| iTerm2 | `iterm2/Catppuccin-Mocha.json`, `iterm2/catppuccin-mocha.itermcolors` |
+| Starship | `.config/starship.toml` |
+| fzf | `.zsh/fzf.zsh` |
+| bat | `.config/bat/config` |
+| VS Code | `vscode/settings.json` |
 
-```bash
-cp ~/.zshrc ~/.zshrc.backup
-```
+Requires a Nerd Font for the prompt glyphs; `brew bundle` installs JetBrains Mono Nerd Font.
 
 ---
+
+## Prompt
+
+Starship, configured in `.config/starship.toml`:
+
+```
+󱃾 mvue-non-prod-eks (us-west-2) (monitor-security)   ~/dotfiles on  main [!4?6]
+󰞏 PROD payments-prod-eks (eu-central-1)              ~/dotfiles on  main [!4?6]
+󰞏 PROD kubernetes-admin@prod-cluster (kube-system)   ~/dotfiles on  main [!4?6]
+󰡨 docker-desktop                                     ~/dotfiles on  main [!4?6]
+```
+
+`[[kubernetes.contexts]]` shortens the context and colours it by environment: dimmed grey for local, teal for non-prod, bold red with a `󰞏 PROD` marker for production. Entries are matched in order, first match wins.
+
+The AWS segment shows the active profile, region and credential expiry.
