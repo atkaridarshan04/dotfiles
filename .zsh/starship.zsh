@@ -42,6 +42,8 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
 fi
 
 
-# Start Starship
-
-eval "$(starship init zsh)"
+# NOTE: starship is initialised in .zshrc, not here.
+# It used to be `eval "$(starship init zsh)"` at the bottom of this file as well, which ran
+# the init twice per shell -- once from this file and once from .zshrc -- doubling the
+# startup cost and installing the precmd/preexec hooks twice. The exports above must still
+# happen before init, which .zshrc guarantees: it sources every ~/.zsh/*.zsh first, then inits.
