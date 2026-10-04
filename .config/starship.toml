@@ -1,14 +1,22 @@
 # ==========================
 # Starship Configuration
-# Clean • Fast • Developer
+# Catppuccin Mocha • k8s-identity aware • Fast
 # ==========================
 
 add_newline = false
-command_timeout = 100
+
+# Raised from 100ms: the kubernetes module parses kubeconfig on every prompt, and a
+# large/multi-cluster kubeconfig routinely exceeds 100ms. When it does, starship drops the
+# module silently -- the cluster you are pointed at just vanishes from the prompt, which is
+# exactly the failure mode you least want. 1000ms is a ceiling, not a cost.
+command_timeout = 1000
 scan_timeout = 30
+
+palette = "catppuccin_mocha"
 
 format = """
 $kubernetes\
+$aws\
 $directory\
 $git_branch\
 $git_status\
@@ -21,6 +29,38 @@ $character
 """
 
 # -------------------------
+# Palette — Catppuccin Mocha
+# -------------------------
+
+[palettes.catppuccin_mocha]
+rosewater = "#f5e0dc"
+flamingo = "#f2cdcd"
+pink = "#f5c2e7"
+mauve = "#cba6f7"
+red = "#f38ba8"
+maroon = "#eba0ac"
+peach = "#fab387"
+yellow = "#f9e2af"
+green = "#a6e3a1"
+teal = "#94e2d5"
+sky = "#89dceb"
+sapphire = "#74c7ec"
+blue = "#89b4fa"
+lavender = "#b4befe"
+text = "#cdd6f4"
+subtext1 = "#bac2de"
+subtext0 = "#a6adc8"
+overlay2 = "#9399b2"
+overlay1 = "#7f849c"
+overlay0 = "#6c7086"
+surface2 = "#585b70"
+surface1 = "#45475a"
+surface0 = "#313244"
+base = "#1e1e2e"
+mantle = "#181825"
+crust = "#11111b"
+
+# -------------------------
 # Prompt
 # -------------------------
 
@@ -30,24 +70,206 @@ error_symbol = "[❯](bold red) "
 vimcmd_symbol = "[❮](bold yellow) "
 
 # -------------------------
+# Kubernetes
+# -------------------------
+#
+# Shows WHO you are and WHERE you are: `user@cluster (namespace)`.
+#
+# Two starship behaviours drive the shape of this section, both verified against
+# starship 1.26.0 rather than taken from the docs:
+#
+#   1. `context_pattern` is implicitly anchored — starship wraps it as `^...$`. A pattern
+#      must match the ENTIRE context string or it silently never fires. There is no partial
+#      matching, and no warning when a pattern fails to match.
+#
+#   2. The Rust regex engine has NO look-around. `(?!...)` is a hard compile error, so
+#      "prod but not non-prod" cannot be written as a negative lookahead. Instead the FIRST
+#      matching `contexts` entry wins, so the negation is expressed by ORDER: every
+#      safe/non-prod pattern is listed BEFORE the prod catch-alls below. Do not reorder
+#      these blocks — moving a prod entry above a non-prod entry turns a staging cluster
+#      red, and (worse) the reverse mistake turns a prod cluster quiet.
+#
+# `context_alias` expands capture groups ($cluster, $region, ...). `user_alias` does NOT —
+# it is a literal string only, so there is no way to derive a useful identity from it.
+#
+# For EKS and GKE the kubeconfig user is byte-identical to the context, so rendering it raw
+# would print the same ARN twice. Those contexts therefore set `user_alias = ""`, and the
+# format wraps the user in a conditional group — `($user@)` — which starship omits entirely
+# when the variable is empty. Result: cloud clusters show just the cluster, while kubeadm /
+# on-prem / Rancher contexts (left unaliased) still show the real `kubernetes-admin` or
+# `cluster-admin`, where the username genuinely signals privilege.
+
+[kubernetes]
+disabled = false
+symbol = "󱃾 "
+style = "bold blue"
+format = '[$symbol($user@)$context( \($namespace\))]($style) '
+
+# --- Local dev clusters: no privilege risk, keep them visually quiet ---
+
+[[kubernetes.contexts]]
+context_pattern = "docker-desktop"
+context_alias = "docker-desktop"
+user_alias = ""
+symbol = "󰡨 "
+style = "dimmed overlay1"
+
+[[kubernetes.contexts]]
+context_pattern = "orbstack"
+context_alias = "orbstack"
+user_alias = ""
+symbol = "󰡨 "
+style = "dimmed overlay1"
+
+[[kubernetes.contexts]]
+context_pattern = "rancher-desktop"
+context_alias = "rancher-desktop"
+user_alias = ""
+symbol = "󰡨 "
+style = "dimmed overlay1"
+
+[[kubernetes.contexts]]
+context_pattern = "minikube"
+context_alias = "minikube"
+user_alias = ""
+symbol = "󰡨 "
+style = "dimmed overlay1"
+
+[[kubernetes.contexts]]
+context_pattern = "kind-(?P<cluster>[\\w.-]+)"
+context_alias = "kind/$cluster"
+user_alias = ""
+symbol = "󰡨 "
+style = "dimmed overlay1"
+
+# --- Managed cloud clusters, NON-prod. Must stay above the prod entries. ---
+# The `[\w-]*(?:non-prod|nonprod|dev|staging|stage|test|qa|sandbox|uat)[\w-]*` segment is
+# what makes the ordering trick work: these claim the context before the prod catch-all sees it.
+
+[[kubernetes.contexts]]
+context_pattern = "arn:aws:eks:(?P<region>[\\w-]+):\\d+:cluster/(?P<cluster>[\\w-]*(?:non-prod|nonprod|dev|staging|stage|test|qa|sandbox|uat)[\\w-]*)"
+context_alias = "$cluster ($region)"
+user_alias = ""
+symbol = "󱃾 "
+style = "bold teal"
+
+[[kubernetes.contexts]]
+context_pattern = "gke_(?P<project>[\\w-]+)_(?P<zone>[\\w-]+)_(?P<cluster>[\\w-]*(?:non-prod|nonprod|dev|staging|stage|test|qa|sandbox|uat)[\\w-]*)"
+context_alias = "$cluster ($zone)"
+user_alias = ""
+symbol = "󱃾 "
+style = "bold teal"
+
+# --- Managed cloud clusters, PRODUCTION. Bold red + alert glyph. ---
+
+[[kubernetes.contexts]]
+context_pattern = "arn:aws:eks:(?P<region>[\\w-]+):\\d+:cluster/(?P<cluster>[\\w-]*(?:prod|prd|live)[\\w-]*)"
+context_alias = "$cluster ($region)"
+user_alias = ""
+symbol = "󰞏 PROD "
+style = "bold red"
+
+[[kubernetes.contexts]]
+context_pattern = "gke_(?P<project>[\\w-]+)_(?P<zone>[\\w-]+)_(?P<cluster>[\\w-]*(?:prod|prd|live)[\\w-]*)"
+context_alias = "$cluster ($zone)"
+user_alias = ""
+symbol = "󰞏 PROD "
+style = "bold red"
+
+# --- Managed cloud clusters, everything else (no env marker in the name) ---
+
+[[kubernetes.contexts]]
+context_pattern = "arn:aws:eks:(?P<region>[\\w-]+):\\d+:cluster/(?P<cluster>[\\w-]+)"
+context_alias = "$cluster ($region)"
+user_alias = ""
+symbol = "󱃾 "
+style = "bold blue"
+
+[[kubernetes.contexts]]
+context_pattern = "gke_(?P<project>[\\w-]+)_(?P<zone>[\\w-]+)_(?P<cluster>[\\w-]+)"
+context_alias = "$cluster ($zone)"
+user_alias = ""
+symbol = "󱃾 "
+style = "bold blue"
+
+# --- kubeadm / on-prem / Rancher, where the context is itself named `user@cluster`.
+# These MUST come before the bare-name rules: `@` is not in `[\w-]`, so without an explicit
+# `@` in the pattern an anchored bare-name rule can never match `kubernetes-admin@prod-cluster`
+# and a production cluster would silently render in plain blue. Aliasing the context down to
+# just `$cluster` also stops `$user@$context` printing the identity twice.
+# No user_alias: `kubernetes-admin` / `cluster-admin` is the privilege signal, shown verbatim.
+
+[[kubernetes.contexts]]
+context_pattern = "(?P<user>[\\w.-]+)@(?P<cluster>[\\w.-]*(?:non-prod|nonprod|dev|staging|stage|test|qa|sandbox|uat)[\\w.-]*)"
+context_alias = "$cluster"
+symbol = "󱃾 "
+style = "bold teal"
+
+[[kubernetes.contexts]]
+context_pattern = "(?P<user>[\\w.-]+)@(?P<cluster>[\\w.-]*(?:prod|prd|live)[\\w.-]*)"
+context_alias = "$cluster"
+symbol = "󰞏 PROD "
+style = "bold red"
+
+[[kubernetes.contexts]]
+context_pattern = "(?P<user>[\\w.-]+)@(?P<cluster>[\\w.-]+)"
+context_alias = "$cluster"
+symbol = "󱃾 "
+style = "bold blue"
+
+# --- Bare-name clusters (context is just the cluster name, e.g. most AKS setups). ---
+# Same reasoning as above: the raw kubeconfig user stays visible as the privilege signal.
+
+[[kubernetes.contexts]]
+context_pattern = "[\\w.-]*(?:non-prod|nonprod|dev|staging|stage|test|qa|sandbox|uat)[\\w.-]*"
+symbol = "󱃾 "
+style = "bold teal"
+
+[[kubernetes.contexts]]
+context_pattern = "[\\w.-]*(?:prod|prd|live)[\\w.-]*"
+symbol = "󰞏 PROD "
+style = "bold red"
+
+# -------------------------
+# AWS
+# -------------------------
+# `$duration` renders as the time left on the active credentials — the practical
+# "am I about to get a 403 mid-apply" signal. Expiry is shown in peach, not the segment
+# style, so it reads as a warning rather than decoration.
+
+[aws]
+disabled = false
+symbol = "󰸏 "
+style = "bold peach"
+format = 'on [$symbol($profile )(\($region\) )]($style)[($duration)](bold yellow) '
+expiration_symbol = "⏳"
+
+[aws.region_aliases]
+ap-south-1 = "bom"
+us-east-1 = "nva"
+us-west-2 = "ore"
+eu-central-1 = "fra"
+
+# -------------------------
 # Directory
 # -------------------------
 
 [directory]
-style = "bold cyan"
+style = "bold sapphire"
 format = "[$path]($style) "
 home_symbol = "~"
 truncate_to_repo = true
 truncation_length = 3
 truncation_symbol = "…/"
-read_only = " "
+read_only = " "
+read_only_style = "bold red"
 
 # -------------------------
 # Git Branch
 # -------------------------
 
 [git_branch]
-symbol = " "
+symbol = " "
 style = "bold green"
 format = "on [$symbol$branch]($style) "
 
@@ -56,7 +278,7 @@ format = "on [$symbol$branch]($style) "
 # -------------------------
 
 [git_status]
-style = "yellow"
+style = "bold yellow"
 format = "([$all_status$ahead_behind]($style) )"
 
 conflicted = "=${count}"
@@ -76,7 +298,7 @@ deleted = "✘${count}"
 # -------------------------
 
 [python]
-symbol = " "
+symbol = " "
 style = "yellow"
 pyenv_version_name = true
 detect_extensions = ["py"]
@@ -92,10 +314,11 @@ format = "via [$symbol$virtualenv]($style)"
 # -------------------------
 # Terraform
 # -------------------------
+# Workspace is the blast-radius signal here, same idea as the kubernetes section.
 
 [terraform]
 symbol = "󱁢 "
-style = "bold blue"
+style = "bold mauve"
 format = " via [$symbol$workspace]($style)"
 
 # -------------------------
@@ -103,20 +326,10 @@ format = " via [$symbol$workspace]($style)"
 # -------------------------
 
 [docker_context]
-symbol = " "
+symbol = " "
 style = "blue"
 format = " via [$symbol$context]($style)"
 only_with_files = true
-
-# -------------------------
-# Kubernetes
-# -------------------------
-
-[kubernetes]
-disabled = false
-symbol = "󱃾 "
-style = "bold purple"
-format = "[$symbol$context( ($namespace))]($style) "
 
 # -------------------------
 # Command Duration
@@ -124,7 +337,7 @@ format = "[$symbol$context( ($namespace))]($style) "
 
 [cmd_duration]
 min_time = 1500
-style = "dimmed white"
+style = "dimmed overlay1"
 format = "[took $duration]($style) "
 
 # -------------------------
@@ -164,9 +377,6 @@ disabled = true
 [swift]
 disabled = true
 
-[aws]
-disabled = true
-
 [gcloud]
 disabled = true
 
@@ -190,4 +400,3 @@ disabled = true
 
 [shell]
 disabled = true
-
