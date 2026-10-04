@@ -160,7 +160,10 @@
   "[github-actions-workflow]": {
     "editor.defaultFormatter": "redhat.vscode-yaml",
   },
-  "workbench.colorTheme": "GitHub Dark Default",
+  "workbench.colorTheme": "Catppuccin Mocha",
+  // Requires the "Catppuccin for VSCode" extension (publisher: Catppuccin).
+  // Matches the terminal, starship prompt, bat and fzf palettes.
+  "editor.semanticHighlighting.enabled": true,
   "security.workspace.trust.untrustedFiles": "open",
   "terminal.integrated.profiles.osx": {
     "bash": {
