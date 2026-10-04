@@ -1,0 +1,93 @@
+# ==========================
+# Ghostty Configuration
+# Catppuccin Mocha (dark)
+# ==========================
+#
+# The palette is written out explicitly rather than using `theme = catppuccin-mocha`.
+# Ghostty bundles a theme list, but bundled themes change between releases and are not
+# part of this repo -- spelling the colours out keeps the terminal identical on every
+# machine and every Ghostty version, which is the whole point of tracking dotfiles.
+# Values come from the official Catppuccin palette (catppuccin/palette: mocha).
+
+# --- Colours ---------------------------------------------------------------
+
+background = 1e1e2e
+foreground = cdd6f4
+
+cursor-color = f5e0dc
+cursor-text = 11111b
+
+selection-background = 353749
+selection-foreground = cdd6f4
+
+split-divider-color = 313244
+
+# ANSI 0-7 (normal) / 8-15 (bright).
+# Unlike the previous xcad2k theme, these keep their semantic meaning: 1/9 really is red,
+# 2/10 really is green. kubectl errors, git diffs and the starship prompt character all
+# depend on that being true.
+palette = 0=#45475a
+palette = 1=#f38ba8
+palette = 2=#a6e3a1
+palette = 3=#f9e2af
+palette = 4=#89b4fa
+palette = 5=#f5c2e7
+palette = 6=#94e2d5
+palette = 7=#a6adc8
+palette = 8=#585b70
+palette = 9=#f38ba8
+palette = 10=#a6e3a1
+palette = 11=#f9e2af
+palette = 12=#89b4fa
+palette = 13=#f5c2e7
+palette = 14=#94e2d5
+palette = 15=#bac2de
+
+# --- Font ------------------------------------------------------------------
+# Nerd Font is required: the starship config uses Nerd Font glyphs for the kubernetes,
+# git, terraform and AWS segments. A non-patched font renders those as tofu boxes.
+
+font-family = JetBrainsMono Nerd Font
+font-size = 14
+font-thicken = true
+
+# --- Window ----------------------------------------------------------------
+
+window-padding-x = 12
+window-padding-y = 8
+window-padding-balance = true
+window-save-state = always
+window-colorspace = display-p3
+background-opacity = 1.0
+# Values: native | transparent | tabs | hidden. If a value is ever rejected, Ghostty logs
+# it and keeps the default rather than failing to start.
+macos-titlebar-style = tabs
+macos-option-as-alt = true
+
+# --- Shell / behaviour -----------------------------------------------------
+
+shell-integration = zsh
+# IMPORTANT: this list REPLACES the default set -- it does not add to it. Listing only
+# cursor,sudo,title silently disabled ssh-env and ssh-terminfo, which is what caused
+# `'xterm-ghostty': unknown terminal type` on remote hosts over SSH.
+#
+#   ssh-env      -- sends a widely-recognised TERM (xterm-256color) to the remote host,
+#                   so clear/vim/less work immediately even on a host that has never
+#                   heard of Ghostty.
+#   ssh-terminfo -- copies Ghostty's own terminfo to the remote's ~/.terminfo on first
+#                   connect, so you get full xterm-ghostty capability from then on.
+shell-integration-features = cursor,sudo,title,ssh-env,ssh-terminfo
+# Bytes, NOT lines (verified against the config reference) -- 10 MB, roughly a few
+# hundred thousand lines of typical kubectl/terraform output.
+scrollback-limit = 10000000
+copy-on-select = clipboard
+confirm-close-surface = true
+mouse-hide-while-typing = true
+
+# --- Keybinds --------------------------------------------------------------
+
+keybind = cmd+d=new_split:right
+keybind = cmd+shift+d=new_split:down
+keybind = cmd+w=close_surface
+keybind = cmd+shift+enter=toggle_split_zoom
+keybind = cmd+k=clear_screen
