@@ -14,6 +14,7 @@ brew "yq"
 brew "tmux"
 brew "btop"
 brew "tree"
+brew "starship"
 
 # Development
 brew "python"
@@ -27,8 +28,9 @@ brew "lazygit"
 
 # GUI applications
 cask "visual-studio-code"
-cask "docker"
+cask "docker-desktop"   # renamed upstream from "docker"
 cask "iterm2"
+cask "ghostty"
 cask "raycast"
 cask "rectangle"
 
