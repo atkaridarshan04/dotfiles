@@ -1,0 +1,5 @@
+# bat configuration
+# Catppuccin is bundled with bat (>= 0.26), so no theme file is vendored and no cache build is needed.
+--theme="Catppuccin Mocha"
+--style="numbers,changes,header"
+--italic-text=always
