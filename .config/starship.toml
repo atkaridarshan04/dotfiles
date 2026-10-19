@@ -1,6 +1,6 @@
 # ==========================
 # Starship Configuration
-# Catppuccin Mocha • k8s-identity aware • Fast
+# One Dark Pro • k8s-identity aware • Fast
 # ==========================
 
 add_newline = false
@@ -12,7 +12,7 @@ add_newline = false
 command_timeout = 1000
 scan_timeout = 30
 
-palette = "catppuccin_mocha"
+palette = "one_dark_pro"
 
 format = """
 $kubernetes\
@@ -29,36 +29,23 @@ $character
 """
 
 # -------------------------
-# Palette — Catppuccin Mocha
+# Palette — One Dark Pro
 # -------------------------
+# Values match the One Dark Pro VS Code theme's terminal.ansi* colours (see
+# scripts/check-palette.py), so the prompt colours agree with the terminal it runs in.
 
-[palettes.catppuccin_mocha]
-rosewater = "#f5e0dc"
-flamingo = "#f2cdcd"
-pink = "#f5c2e7"
-mauve = "#cba6f7"
-red = "#f38ba8"
-maroon = "#eba0ac"
-peach = "#fab387"
-yellow = "#f9e2af"
-green = "#a6e3a1"
-teal = "#94e2d5"
-sky = "#89dceb"
-sapphire = "#74c7ec"
-blue = "#89b4fa"
-lavender = "#b4befe"
-text = "#cdd6f4"
-subtext1 = "#bac2de"
-subtext0 = "#a6adc8"
-overlay2 = "#9399b2"
-overlay1 = "#7f849c"
-overlay0 = "#6c7086"
-surface2 = "#585b70"
-surface1 = "#45475a"
-surface0 = "#313244"
-base = "#1e1e2e"
-mantle = "#181825"
-crust = "#11111b"
+[palettes.one_dark_pro]
+red = "#e05561"
+green = "#8cc265"
+yellow = "#d18f52"
+peach = "#f0a45d"
+blue = "#4aa5f0"
+sapphire = "#4dc4ff"
+mauve = "#c162de"
+teal = "#42b3c2"
+overlay1 = "#4f5666"
+text = "#abb2bf"
+base = "#23272e"
 
 # -------------------------
 # Prompt

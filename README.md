@@ -1,6 +1,6 @@
 # Dotfiles
 
-Personal configuration for shell, terminal, editor and tools, themed with Catppuccin Mocha.
+Personal configuration for shell, terminal, editor and tools, themed with One Dark Pro.
 
 ---
 
@@ -25,8 +25,8 @@ Personal configuration for shell, terminal, editor and tools, themed with Catppu
 ├── Makefile
 ├── install.sh
 ├── iterm2
-│   ├── Catppuccin-Mocha.json
-│   └── catppuccin-mocha.itermcolors
+│   ├── One-Dark-Pro.json
+│   └── one-dark-pro.itermcolors
 ├── scripts/check-palette.py
 └── vscode/settings.json
 ```
@@ -49,19 +49,19 @@ exec zsh
 
 Then:
 
-- **iTerm2** — Settings → Profiles → *Catppuccin Mocha* → set as default.
-- **VS Code** — install the *Catppuccin for VSCode* extension.
+- **iTerm2** — Settings → Profiles → *One Dark Pro Darker* → set as default.
+- **VS Code** — install the *One Dark Pro* extension, select the *One Dark Pro Darker* theme.
 
 ---
 
 ## Theme
 
-Catppuccin Mocha across every surface:
+One Dark Pro across every surface:
 
 | Surface | File |
 |---|---|
 | Ghostty | `.config/ghostty/config` |
-| iTerm2 | `iterm2/Catppuccin-Mocha.json`, `iterm2/catppuccin-mocha.itermcolors` |
+| iTerm2 | `iterm2/One-Dark-Pro.json`, `iterm2/one-dark-pro.itermcolors` |
 | Starship | `.config/starship.toml` |
 | fzf | `.zsh/fzf.zsh` |
 | bat | `.config/bat/config` |

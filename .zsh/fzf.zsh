@@ -1,13 +1,14 @@
-# fzf — Catppuccin Mocha
-# Colours are the official catppuccin/fzf mocha snippet. Without this fzf keeps its own
-# default palette, which sits badly on the Mocha background.
+# fzf — One Dark Pro
+# Colours are derived from the One Dark Pro palette (scripts/check-palette.py keeps them
+# in sync with the rest of the theme). Without this fzf keeps its own default palette,
+# which sits badly on the One Dark background.
 
 export FZF_DEFAULT_OPTS=" \
---color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
---color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
---color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
---color=selected-bg:#45475a \
---color=border:#6c7086,label:#cdd6f4 \
+--color=bg+:#3f4451,bg:#23272e,spinner:#f0a45d,hl:#e05561 \
+--color=fg:#abb2bf,header:#e05561,info:#c162de,pointer:#f0a45d \
+--color=marker:#de73ff,fg+:#d7dae0,prompt:#c162de,hl+:#e05561 \
+--color=selected-bg:#4f5666 \
+--color=border:#4f5666,label:#abb2bf \
 --height=60% --layout=reverse --border=rounded --info=inline"
 
 # Use fd for traversal when available: respects .gitignore and skips .git.
