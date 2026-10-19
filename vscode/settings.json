@@ -48,7 +48,6 @@
   "breadcrumbs.enabled": true,
 
   // Terminal
-  "terminal.integrated.macOptionIsMeta": true,
   "terminal.integrated.enablePersistentSessions": true,
   "terminal.integrated.persistentSessionReviveProcess": "onExitAndWindowClose",
   "terminal.integrated.copyOnSelection": true,
