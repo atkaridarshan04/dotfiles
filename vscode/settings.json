@@ -160,8 +160,8 @@
   "[github-actions-workflow]": {
     "editor.defaultFormatter": "redhat.vscode-yaml",
   },
-  "workbench.colorTheme": "One Dark Pro Darker",
-  // Requires the "One Dark Pro" extension (publisher: zhuangtongfa.material-theme).
+  "workbench.colorTheme": "Dark+",
+  // Built into VS Code -- no extension required.
   // Matches the terminal, starship prompt, bat and fzf palettes.
   "editor.semanticHighlighting.enabled": true,
   "security.workspace.trust.untrustedFiles": "open",

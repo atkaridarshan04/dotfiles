@@ -1,6 +1,6 @@
 # ==========================
 # Starship Configuration
-# One Dark Pro • k8s-identity aware • Fast
+# Dark+ • k8s-identity aware • Fast
 # ==========================
 
 add_newline = false
@@ -12,7 +12,7 @@ add_newline = false
 command_timeout = 1000
 scan_timeout = 30
 
-palette = "one_dark_pro"
+palette = "dark_plus"
 
 format = """
 $kubernetes\
@@ -29,23 +29,23 @@ $character
 """
 
 # -------------------------
-# Palette — One Dark Pro
+# Palette — Dark+
 # -------------------------
-# Values match the One Dark Pro VS Code theme's terminal.ansi* colours (see
+# Values match VS Code's built-in "Dark+" theme's terminal.ansi* colours (see
 # scripts/check-palette.py), so the prompt colours agree with the terminal it runs in.
 
-[palettes.one_dark_pro]
-red = "#e05561"
-green = "#8cc265"
-yellow = "#d18f52"
-peach = "#f0a45d"
-blue = "#4aa5f0"
-sapphire = "#4dc4ff"
-mauve = "#c162de"
-teal = "#42b3c2"
-overlay1 = "#4f5666"
-text = "#abb2bf"
-base = "#23272e"
+[palettes.dark_plus]
+red = "#cd3131"
+green = "#0dbc79"
+yellow = "#e5e510"
+peach = "#f5f543"
+blue = "#2472c8"
+sapphire = "#3b8eea"
+mauve = "#bc3fbc"
+teal = "#11a8cd"
+overlay1 = "#666666"
+text = "#d4d4d4"
+base = "#1e1e1e"
 
 # -------------------------
 # Prompt

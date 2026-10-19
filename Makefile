@@ -20,7 +20,7 @@ check:
 	  if [ -n "$$out" ]; then echo "$$out"; exit 1; else echo "  ok  valid"; fi; \
 	else echo "  skip  ghostty not installed"; fi
 	@echo "== iterm2 profile =="
-	@python3 -c "import json;d=json.load(open('iterm2/One-Dark-Pro.json'))['Profiles'][0];\
+	@python3 -c "import json;d=json.load(open('iterm2/Dark-Plus.json'))['Profiles'][0];\
 	assert all(k in d for k in ('Name','Guid'));print('  ok  valid, has Name and Guid')"
 	@echo "== palette =="
 	@python3 scripts/check-palette.py
