@@ -26,6 +26,16 @@
       "Mouse Reporting": true,
       "Option Key Sends": 2,
       "Right Option Key Sends": 2,
+      "Key Mappings": {
+        "0x7f-0x100000": { "Action": 11, "Text": "0x15" },
+        "0x7f-0x80000": { "Action": 11, "Text": "0x1b 0x7f" },
+        "f702-0x280000": { "Action": 10, "Text": "b" },
+        "f702-0x300000": { "Action": 11, "Text": "0x1" },
+        "f703-0x280000": { "Action": 10, "Text": "f" },
+        "f703-0x300000": { "Action": 11, "Text": "0x5" },
+        "f728-0x0": { "Action": 11, "Text": "0x4" },
+        "f728-0x80000": { "Action": 10, "Text": "d" }
+      },
       "Custom Directory": "Recycle",
       "Prompt Before Closing 2": false,
       "Terminal Type": "xterm-256color",
