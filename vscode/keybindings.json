@@ -1,0 +1,22 @@
+[
+  // Natural text editing in the integrated terminal, matching the iTerm2 profile:
+  // Cmd+Left/Right jump to line start/end, Cmd+Backspace kills to line start.
+  {
+    "key": "cmd+left",
+    "command": "workbench.action.terminal.sendSequence",
+    "when": "terminalFocus",
+    "args": { "text": "\u0001" }
+  },
+  {
+    "key": "cmd+right",
+    "command": "workbench.action.terminal.sendSequence",
+    "when": "terminalFocus",
+    "args": { "text": "\u0005" }
+  },
+  {
+    "key": "cmd+backspace",
+    "command": "workbench.action.terminal.sendSequence",
+    "when": "terminalFocus",
+    "args": { "text": "\u0015" }
+  }
+]

@@ -71,6 +71,8 @@ printf '    copy %s\n' "$ITERM_DP/Catppuccin-Mocha.json"
 info "VS Code"
 link "$REPO/vscode/settings.json" \
      "$HOME/Library/Application Support/Code/User/settings.json"
+link "$REPO/vscode/keybindings.json" \
+     "$HOME/Library/Application Support/Code/User/keybindings.json"
 
 echo
 info "Done. Open a new shell, or: exec zsh"
