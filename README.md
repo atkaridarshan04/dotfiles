@@ -1,6 +1,6 @@
 # Dotfiles
 
-Personal configuration for shell, terminal, editor and tools, themed with One Dark Pro.
+Personal configuration for shell, terminal, editor and tools, themed with GitHub Dark.
 
 ---
 
@@ -25,8 +25,8 @@ Personal configuration for shell, terminal, editor and tools, themed with One Da
 ├── Makefile
 ├── install.sh
 ├── iterm2
-│   ├── One-Dark-Pro.json
-│   └── one-dark-pro.itermcolors
+│   ├── GitHub-Dark.json
+│   └── github-dark.itermcolors
 ├── scripts/check-palette.py
 └── vscode/settings.json
 ```
@@ -49,19 +49,19 @@ exec zsh
 
 Then:
 
-- **iTerm2** — Settings → Profiles → *One Dark Pro Darker* → set as default.
-- **VS Code** — install the *One Dark Pro* extension, select the *One Dark Pro Darker* theme.
+- **iTerm2** — Settings → Profiles → *GitHub Dark* → set as default.
+- **VS Code** — install the *GitHub Theme* extension, select the *GitHub Dark Default* theme.
 
 ---
 
 ## Theme
 
-One Dark Pro across every surface:
+GitHub Dark across every surface:
 
 | Surface | File |
 |---|---|
 | Ghostty | `.config/ghostty/config` |
-| iTerm2 | `iterm2/One-Dark-Pro.json`, `iterm2/one-dark-pro.itermcolors` |
+| iTerm2 | `iterm2/GitHub-Dark.json`, `iterm2/github-dark.itermcolors` |
 | Starship | `.config/starship.toml` |
 | fzf | `.zsh/fzf.zsh` |
 | bat | `.config/bat/config` |

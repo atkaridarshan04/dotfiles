@@ -1,18 +1,16 @@
 #!/usr/bin/env python3
-"""Verify every surface uses the same One Dark Pro Darker values."""
+"""Verify every surface uses the same GitHub Dark values."""
 import json, re, plistlib, sys
 
-# ANSI colours match the One Dark Pro VS Code theme's terminal.ansi* values exactly (these
-# are shared with the non-Darker variant); "base" is the Darker variant's editor.background
-# (#23272e instead of #282c34), so the external terminals (Ghostty, iTerm2) agree with
-# VS Code's integrated terminal.
+# Matches the "GitHub Dark Default" VS Code theme's terminal.ansi* colours exactly, so
+# the external terminals (Ghostty, iTerm2) agree with VS Code's integrated terminal.
 ANSI_COLORS = {
-    "black": "3f4451", "red": "e05561", "green": "8cc265", "yellow": "d18f52",
-    "blue": "4aa5f0", "magenta": "c162de", "cyan": "42b3c2", "white": "d7dae0",
-    "bright_black": "4f5666", "bright_red": "ff616e", "bright_green": "a5e075",
-    "bright_yellow": "f0a45d", "bright_blue": "4dc4ff", "bright_magenta": "de73ff",
-    "bright_cyan": "4cd1e0", "bright_white": "e6e6e6",
-    "base": "23272e", "text": "abb2bf",
+    "black": "484f58", "red": "ff7b72", "green": "3fb950", "yellow": "d29922",
+    "blue": "58a6ff", "magenta": "bc8cff", "cyan": "39c5cf", "white": "b1bac4",
+    "bright_black": "6e7681", "bright_red": "ffa198", "bright_green": "56d364",
+    "bright_yellow": "e3b341", "bright_blue": "79c0ff", "bright_magenta": "d2a8ff",
+    "bright_cyan": "56d4dd", "bright_white": "ffffff",
+    "base": "0d1117", "text": "e6edf3",
 }
 ANSI = {0:"black",1:"red",2:"green",3:"yellow",4:"blue",5:"magenta",6:"cyan",7:"white",
         8:"bright_black",9:"bright_red",10:"bright_green",11:"bright_yellow",
@@ -45,8 +43,8 @@ def unhex(d):
     return "".join(f"{round(d[k]*255):02x}"
                    for k in ("Red Component", "Green Component", "Blue Component"))
 
-ic = plistlib.load(open("iterm2/one-dark-pro.itermcolors", "rb"))
-dp = json.load(open("iterm2/One-Dark-Pro.json"))["Profiles"][0]
+ic = plistlib.load(open("iterm2/github-dark.itermcolors", "rb"))
+dp = json.load(open("iterm2/GitHub-Dark.json"))["Profiles"][0]
 for label, prof in (("itermcolors", ic), ("dynamicprofile", dp)):
     for i in range(16):
         got = unhex(prof[f"Ansi {i} Color"])
@@ -56,7 +54,7 @@ for label, prof in (("itermcolors", ic), ("dynamicprofile", dp)):
         fails.append(f"{label} background")
 
 st = open(".config/starship.toml").read()
-blk = st[st.index("[palettes.one_dark_pro]"):st.index("[character]")]
+blk = st[st.index("[palettes.github_dark]"):st.index("[character]")]
 sp = {a: b.lower() for a, b in re.findall(r'^(\w+)\s*=\s*"#([0-9a-fA-F]{6})"', blk, re.M)}
 for name, hexv in STARSHIP_EXPECT.items():
     if sp.get(name) != hexv:

@@ -1,5 +1,7 @@
 # bat configuration
-# OneHalfDark is bundled with bat by default, so no theme file is vendored and no cache build is needed.
---theme="OneHalfDark"
+# bat has no bundled GitHub Dark theme. Coldark-Dark is bundled by default and is the
+# closest match (cold, muted, near-black navy) -- no theme file is vendored, no cache
+# build needed, but it won't match the other surfaces' hex values exactly.
+--theme="Coldark-Dark"
 --style="numbers,changes,header"
 --italic-text=always

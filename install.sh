@@ -51,7 +51,7 @@ info "Ghostty"
 link "$REPO/.config/ghostty/config"         "$HOME/.config/ghostty/config"
 
 info "bat"
-# No theme file is vendored here: bat bundles OneHalfDark out of the box,
+# No theme file is vendored here: bat bundles Coldark-Dark out of the box,
 # so the config just selects it. Nothing to compile, no `bat cache --build`.
 link "$REPO/.config/bat/config"             "$HOME/.config/bat/config"
 
@@ -62,14 +62,16 @@ info "iTerm2"
 # knowingly re-copy. Cost: re-run this script after editing the profile in the repo.
 ITERM_DP="$HOME/Library/Application Support/iTerm2/DynamicProfiles"
 mkdir -p "$ITERM_DP"
-if [[ -e "$ITERM_DP/Catppuccin-Mocha.json" ]]; then
-    rm "$ITERM_DP/Catppuccin-Mocha.json"   # clean up the profile from the old theme
+for old in Catppuccin-Mocha.json One-Dark-Pro.json; do
+    if [[ -e "$ITERM_DP/$old" ]]; then
+        rm "$ITERM_DP/$old"   # clean up the profile from an earlier theme
+    fi
+done
+if [[ -L "$ITERM_DP/GitHub-Dark.json" ]]; then
+    rm "$ITERM_DP/GitHub-Dark.json"   # clean up a symlink from an earlier run
 fi
-if [[ -L "$ITERM_DP/One-Dark-Pro.json" ]]; then
-    rm "$ITERM_DP/One-Dark-Pro.json"   # clean up a symlink from an earlier run
-fi
-cp "$REPO/iterm2/One-Dark-Pro.json" "$ITERM_DP/One-Dark-Pro.json"
-printf '    copy %s\n' "$ITERM_DP/One-Dark-Pro.json"
+cp "$REPO/iterm2/GitHub-Dark.json" "$ITERM_DP/GitHub-Dark.json"
+printf '    copy %s\n' "$ITERM_DP/GitHub-Dark.json"
 
 info "VS Code"
 link "$REPO/vscode/settings.json" \
@@ -77,5 +79,5 @@ link "$REPO/vscode/settings.json" \
 
 echo
 info "Done. Open a new shell, or: exec zsh"
-echo "    iTerm2:  Preferences > Profiles > 'One Dark Pro Darker' (set as default)"
-echo "    VS Code: install the 'One Dark Pro' extension, select the 'One Dark Pro Darker' theme"
+echo "    iTerm2:  Preferences > Profiles > 'GitHub Dark' (set as default)"
+echo "    VS Code: install the 'GitHub Theme' extension, select the 'GitHub Dark Default' theme"

@@ -1,48 +1,48 @@
 # ==========================
 # Ghostty Configuration
-# One Dark Pro Darker (dark)
+# GitHub Dark (dark)
 # ==========================
 #
-# The palette is written out explicitly rather than using `theme = one-dark`.
+# The palette is written out explicitly rather than using `theme = github-dark`.
 # Ghostty bundles a theme list, but bundled themes change between releases and are not
 # part of this repo -- spelling the colours out keeps the terminal identical on every
 # machine and every Ghostty version, which is the whole point of tracking dotfiles.
-# Values come from the One Dark Pro VS Code theme's own terminal.ansi* colours, so this
-# terminal matches VS Code's integrated terminal exactly.
+# Values come from the "GitHub Dark Default" VS Code theme's own terminal.ansi* colours,
+# so this terminal matches VS Code's integrated terminal exactly.
 
 # --- Colours ---------------------------------------------------------------
 
-background = 23272e
-foreground = abb2bf
+background = 0d1117
+foreground = e6edf3
 
-cursor-color = 528bff
-cursor-text = 23272e
+cursor-color = 2f81f7
+cursor-text = 0d1117
 
-selection-background = 3f4451
-selection-foreground = d7dae0
+selection-background = 484f58
+selection-foreground = b1bac4
 
-split-divider-color = 181a1f
+split-divider-color = 30363d
 
 # ANSI 0-7 (normal) / 8-15 (bright).
 # Unlike the previous xcad2k theme, these keep their semantic meaning: 1/9 really is red,
 # 2/10 really is green. kubectl errors, git diffs and the starship prompt character all
 # depend on that being true.
-palette = 0=#3f4451
-palette = 1=#e05561
-palette = 2=#8cc265
-palette = 3=#d18f52
-palette = 4=#4aa5f0
-palette = 5=#c162de
-palette = 6=#42b3c2
-palette = 7=#d7dae0
-palette = 8=#4f5666
-palette = 9=#ff616e
-palette = 10=#a5e075
-palette = 11=#f0a45d
-palette = 12=#4dc4ff
-palette = 13=#de73ff
-palette = 14=#4cd1e0
-palette = 15=#e6e6e6
+palette = 0=#484f58
+palette = 1=#ff7b72
+palette = 2=#3fb950
+palette = 3=#d29922
+palette = 4=#58a6ff
+palette = 5=#bc8cff
+palette = 6=#39c5cf
+palette = 7=#b1bac4
+palette = 8=#6e7681
+palette = 9=#ffa198
+palette = 10=#56d364
+palette = 11=#e3b341
+palette = 12=#79c0ff
+palette = 13=#d2a8ff
+palette = 14=#56d4dd
+palette = 15=#ffffff
 
 # --- Font ------------------------------------------------------------------
 # Nerd Font is required: the starship config uses Nerd Font glyphs for the kubernetes,
