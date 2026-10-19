@@ -15,7 +15,7 @@
       "ASCII Anti Aliased": true,
       "Non-ASCII Anti Aliased": true,
       "Draw Powerline Glyphs": true,
-      "Cursor Type": 2,
+      "Cursor Type": 1,
       "Blinking Cursor": true,
       "Unlimited Scrollback": true,
       "Scrollback Lines": 10000,

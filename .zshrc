@@ -1,6 +1,9 @@
 # Homebrew
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
+# Force emacs keybindings -- EDITOR/VISUAL=vim below would otherwise make zle default to vi mode.
+bindkey -e
+
 # Custom configs
 if [[ -d "$HOME/.zsh" ]]; then
     for file in "$HOME/.zsh"/*.zsh; do

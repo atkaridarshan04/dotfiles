@@ -18,7 +18,8 @@ Personal configuration for shell, terminal, editor and tools, themed with Catppu
 │   ├── env.zsh
 │   ├── functions.zsh
 │   ├── fzf.zsh
-│   └── history.zsh
+│   ├── history.zsh
+│   └── keybindings.zsh
 ├── .zshrc
 ├── Brewfile
 ├── Makefile
